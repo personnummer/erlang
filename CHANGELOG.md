@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Moved the repository to [personnummer/erlang](https://github.com/personnummer/erlang).
+  The Hex package name remains `personnummer_erl`.
+
 ## [3.1.0] - 2026-05-03
 
 ### Added
@@ -14,5 +19,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation of the
   [personnummer specification v3.1](https://github.com/personnummer/meta).
 
-[Unreleased]: https://github.com/denizdogan/personnummer_erl/compare/v3.1.0...HEAD
-[3.1.0]: https://github.com/denizdogan/personnummer_erl/releases/tag/v3.1.0
+[Unreleased]: https://github.com/personnummer/erlang/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/personnummer/erlang/releases/tag/v3.1.0

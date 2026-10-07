@@ -1,7 +1,7 @@
 # personnummer_erl
 
-[![CI](https://github.com/denizdogan/personnummer_erl/actions/workflows/erlang.yml/badge.svg)](https://github.com/denizdogan/personnummer_erl/actions/workflows/erlang.yml)
-[![codecov](https://codecov.io/gh/denizdogan/personnummer_erl/branch/main/graph/badge.svg)](https://codecov.io/gh/denizdogan/personnummer_erl)
+[![CI](https://github.com/personnummer/erlang/actions/workflows/erlang.yml/badge.svg)](https://github.com/personnummer/erlang/actions/workflows/erlang.yml)
+[![codecov](https://codecov.io/gh/personnummer/erlang/branch/main/graph/badge.svg)](https://codecov.io/gh/personnummer/erlang)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Validate, parse and format Swedish personal identity numbers
