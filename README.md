@@ -102,6 +102,10 @@ CI runs `mise check` plus codecov upload on OTP 27 and 28.
 3. Run `mise publish`. This publishes to Hex (requires
    `rebar3 hex user auth` once), tags `vX.Y.Z`, and pushes the tag.
 
+## In memoriam
+
+Fredrik "Frozzare" Forsmo (1991-2026) was the initiator, co-founder and a core contributor of the personnummer project. This library carries his work. He is missed.
+
 ## License
 
 [MIT](LICENSE)
