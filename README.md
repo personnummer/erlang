@@ -1,7 +1,6 @@
 # personnummer_erl
 
 [![CI](https://github.com/personnummer/erlang/actions/workflows/erlang.yml/badge.svg)](https://github.com/personnummer/erlang/actions/workflows/erlang.yml)
-[![codecov](https://codecov.io/gh/personnummer/erlang/branch/main/graph/badge.svg)](https://codecov.io/gh/personnummer/erlang)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Validate, parse and format Swedish personal identity numbers
@@ -78,7 +77,8 @@ $ mise cover      # test coverage report
 $ mise docs       # ex_doc
 ```
 
-CI runs `mise check` plus codecov upload on OTP 27 and 28.
+CI runs compilation, formatting checks, EUnit with coverage, Dialyzer,
+and Eqwalizer on OTP 27 and 28.
 
 ### Conventions
 
