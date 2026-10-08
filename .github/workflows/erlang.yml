@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     strategy:
       fail-fast: false
       matrix:
@@ -57,18 +56,10 @@ jobs:
         run: rebar3 fmt --check
 
       - name: EUnit
-        run: rebar3 as test do eunit --cover
+        run: rebar3 as test 'do' eunit --cover
 
       - name: Coverage
-        run: rebar3 as test do cover --verbose, codecov analyze
-
-      - name: Upload coverage to Codecov
-        if: matrix.otp == '28'
-        uses: codecov/codecov-action@v6
-        with:
-          files: codecov.json
-          fail_ci_if_error: false
-          use_oidc: true
+        run: rebar3 as test 'do' cover --verbose
 
       - name: Dialyzer
         run: rebar3 dialyzer

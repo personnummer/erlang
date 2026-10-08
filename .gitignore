@@ -20,4 +20,3 @@ rebar3.crashdump
 *~
 doc/
 .DS_Store
-codecov.json
