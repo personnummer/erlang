@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.1] - 2026-10-15
+
 ### Changed
 
 - Moved the repository to [personnummer/erlang](https://github.com/personnummer/erlang).
@@ -19,5 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation of the
   [personnummer specification v3.1](https://github.com/personnummer/meta).
 
-[Unreleased]: https://github.com/personnummer/erlang/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/personnummer/erlang/compare/v3.1.1...HEAD
+[3.1.1]: https://github.com/personnummer/erlang/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/personnummer/erlang/releases/tag/v3.1.0

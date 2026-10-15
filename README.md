@@ -19,7 +19,7 @@ Supports:
 Add to `rebar.config`:
 
 ```erlang
-{deps, [{personnummer_erl, "3.1.0"}]}.
+{deps, [{personnummer_erl, "3.1.1"}]}.
 ```
 
 Requires Erlang/OTP 27 or newer.
@@ -95,7 +95,7 @@ and Eqwalizer on OTP 27 and 28.
 
 ### Releasing
 
-1. Bump `vsn` in `src/personnummer.app.src` and convert the
+1. Bump `vsn` in `src/personnummer_erl.app.src` and convert the
    `[Unreleased]` heading in `CHANGELOG.md` to the new version. Commit
    and push.
 2. Run `mise check` to confirm everything is green.
