@@ -77,7 +77,7 @@ Options accepted by `parse/2` and `valid/2`.
 }).
 
 -define(REGEX,
-    "^(\\d{2})?(\\d{2})(\\d{2})(\\d{2})([-+]?)((?:[TRSUWXJKLMN]|\\d)\\d{2})(\\d)$"
+    "\\A(\\d{2})?(\\d{2})(\\d{2})(\\d{2})([-+]?)((?:[TRSUWXJKLMN]|\\d)\\d{2})(\\d)\\z"
 ).
 
 %%%=============================================================================
@@ -95,7 +95,7 @@ Parse a personnummer from `Input` using `Options`.
 Accepts any of the canonical input formats: `YYMMDDXXXX`,
 `YYMMDD-XXXX`, `YYMMDD+XXXX`, `YYYYMMDDXXXX`, `YYYYMMDD-XXXX`,
 `YYYYMMDD+XXXX`. The `+` separator on a short input shifts the implied
-century back by 100 years (used for people aged 100+).
+century back by 100 years (used from the year a person turns 100).
 
 Returns `{ok, Pnr}` on success or `{error, Reason}` where `Reason` is
 a `t:parse_error/0`.
@@ -129,7 +129,7 @@ format(Pnr) ->
 Render `Pnr` in short or long form.
 
 - `format(Pnr, false)` -> `<<"YYMMDD-XXXX">>`. The separator is `+`
-  if the person is 100+ years old, otherwise `-`.
+  from the calendar year the person turns 100, otherwise `-`.
 - `format(Pnr, true)`  -> `<<"YYYYMMDDXXXX">>` (no separator).
 
 For coordination numbers the day is rendered as the stored day plus
@@ -183,8 +183,8 @@ get_check(#personnummer{check = Check}) ->
     Check.
 
 -doc """
-Return the separator that the short form would use today: `<<"+">>` if
-the person is at least 100 years old, `<<"-">>` otherwise.
+Return the separator that the short form would use today: `<<"+">>` from
+the calendar year the person turns 100, `<<"-">>` otherwise.
 """.
 -spec get_separator(personnummer()) -> binary().
 get_separator(Pnr) ->
@@ -369,9 +369,10 @@ long_format(#personnummer{date = {Y, M, D}, serial = Serial, check = Check} = Pn
 render_day(D, #personnummer{coordination = true}) -> D + 60;
 render_day(D, _) -> D.
 
-%% '+' if person is at least 100 years old, otherwise '-'.
-render_separator(Pnr) ->
-    case get_age(Pnr) >= 100 of
+%% The separator changes in the year the person turns 100, not on the birthday.
+render_separator(#personnummer{date = {BirthYear, _, _}}) ->
+    {Year, _, _} = erlang:date(),
+    case Year - BirthYear >= 100 of
         true -> <<"+">>;
         false -> <<"-">>
     end.

@@ -1,6 +1,6 @@
 {application, personnummer_erl, [
     {description, "Validate Swedish personal identity numbers (personnummer)"},
-    {vsn, "3.1.1"},
+    {vsn, "3.1.2"},
     {registered, []},
     {applications, [kernel, stdlib]},
     {env, []},
