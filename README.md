@@ -65,20 +65,24 @@ instructions.
 ## Development
 
 This project uses [Mise](https://mise.jdx.dev/) for tool versions and
-task running.
+task running. Erlang/OTP, rebar3, and ELP are pinned in [mise.toml](mise.toml).
+Eqwalizer tasks resolve ELP through Mise and unset `ELP_EQWALIZER_PATH` so
+custom `PATH` entries or unrelated local checker builds cannot override
+the pinned toolchain.
 
 ```console
+$ mise install
 $ mise compile
 $ mise test
 $ mise format     # apply erlfmt
-$ mise check      # fmt-check, eunit, dialyzer
-$ mise eq-all     # eqwalizer (requires `elp` on PATH)
+$ mise check      # compile, fmt-check, eunit, dialyzer, eqwalizer
+$ mise eq-all     # eqwalizer (installed by Mise)
 $ mise cover      # test coverage report
 $ mise docs       # ex_doc
 ```
 
 CI runs compilation, formatting checks, EUnit with coverage, Dialyzer,
-and Eqwalizer on OTP 27 and 28.
+and Eqwalizer on OTP 27, 28, and 29.
 
 ### Conventions
 

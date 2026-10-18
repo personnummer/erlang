@@ -1,6 +1,11 @@
 [tools]
-erlang = "latest"
-rebar = "latest"
+erlang = "29.1.2"
+rebar = "3.27.3"
+"github:WhatsApp/erlang-language-platform" = { version = "2026-10-14", matching = "otp-29.1.tar.gz" }
+
+[env]
+# Keep ELP paired with its bundled Eqwalizer instead of an unrelated local build.
+ELP_EQWALIZER_PATH = false
 
 [tasks.compile]
 run = "rebar3 compile"
@@ -20,11 +25,12 @@ run = "rebar3 as test do eunit"
 [tasks.dialyzer]
 run = "rebar3 dialyzer"
 
+# Resolve the pinned ELP even when a local build precedes it on PATH.
 [tasks.eq]
-run = "elp eqwalize"
+run = "mise exec -- elp eqwalize"
 
 [tasks.eq-all]
-run = "elp eqwalize-all"
+run = "mise exec -- elp eqwalize-all"
 
 [tasks.docs]
 run = "rebar3 ex_doc"
@@ -38,10 +44,12 @@ open ./_build/test/cover/index.html
 
 [tasks.check]
 run = """
+set -e
 rebar3 compile
 rebar3 fmt --check
 rebar3 as test do eunit
 rebar3 dialyzer
+mise exec -- elp eqwalize-all
 """
 
 [tasks.erl]

@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.1.2] - 2026-10-18
 
+### Changed
+
+- Add CI coverage for OTP 29 while retaining OTP 27 and 28 support.
+- Pin the development toolchain to OTP 29.1.2, rebar3 3.27.3, and ELP 2026-10-14.
+- Include Eqwalizer in `mise check` and use ELP's bundled support library and
+  matching checker instead of separate local or Git dependencies.
+
 ### Fixed
 
 - Use the `+` separator from the calendar year a person turns 100, preserving
