@@ -19,7 +19,7 @@ Supports:
 Add to `rebar.config`:
 
 ```erlang
-{deps, [{personnummer_erl, "3.1.1"}]}.
+{deps, [{personnummer_erl, "3.1.2"}]}.
 ```
 
 Requires Erlang/OTP 27 or newer.
