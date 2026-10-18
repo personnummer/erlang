@@ -10,7 +10,7 @@ Validate, parse and format Swedish personal identity numbers
 Supports:
 
 - Regular personnummer (`YYMMDD-XXXX`, `YYYYMMDD-XXXX`, `+` separator
-  for ages 100+)
+  from the year a person turns 100)
 - Coordination numbers (samordningsnummer, day = real day + 60)
 - Interim numbers (T-numbers, opt-in via options map)
 

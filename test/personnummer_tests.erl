@@ -42,6 +42,24 @@ parse_invalid_format_test_() ->
         ?_assertEqual({error, invalid_format}, personnummer:parse(<<"19090527 1474">>))
     ].
 
+parse_trailing_newline_test_() ->
+    Inputs = [
+        <<"8608134667\n">>,
+        <<"860813-4667\n">>,
+        <<"090527+1474\n">>,
+        <<"198608134667\n">>,
+        <<"19860813-4667\n">>,
+        <<"19090527+1474\n">>,
+        ["198608", <<"134667\n">>]
+    ],
+    [
+        fun() ->
+            ?assertEqual({error, invalid_format}, personnummer:parse(Input)),
+            ?assertNot(personnummer:valid(Input))
+        end
+     || Input <- Inputs
+    ].
+
 parse_invalid_date_test_() ->
     [
         ?_assertEqual({error, invalid_date}, personnummer:parse(<<"198613134667">>)),
@@ -203,6 +221,20 @@ format_separator_for_centenarian_test() ->
     {ok, P} = personnummer:parse(<<"19090527+1474">>),
     ?assertEqual(<<"090527+1474">>, personnummer:format(P)).
 
+format_separator_centennial_year_test_() ->
+    {Year, _, _} = erlang:date(),
+    [
+        fun() ->
+            Date = {Year - YearsAgo, Month, Day},
+            P = personnummer_for_date(Date),
+            ?assertEqual(Separator, personnummer:get_separator(P)),
+            {ok, RoundTripped} = personnummer:parse(personnummer:format(P)),
+            ?assertEqual(Date, personnummer:get_date(RoundTripped))
+        end
+     || {YearsAgo, Separator} <- [{99, <<"-">>}, {100, <<"+">>}, {101, <<"+">>}],
+        {Month, Day} <- [{1, 1}, {12, 31}]
+    ].
+
 format_coordination_number_test() ->
     {ok, P} = personnummer:parse(<<"197302889931">>),
     ?assertEqual(<<"730288-9931">>, personnummer:format(P)),
@@ -261,6 +293,14 @@ get_age_test() ->
     ?assertEqual(40, personnummer:get_age(P, {2026, 8, 13})),
     ?assertEqual(39, personnummer:get_age(P, {2026, 8, 12})),
     ?assertEqual(40, personnummer:get_age(P, {2027, 8, 12})).
+
+get_age_centennial_year_test() ->
+    Today = erlang:date(),
+    {Year, _, _} = Today,
+    P = personnummer_for_date({Year - 100, 12, 31}),
+    ?assertEqual(99, personnummer:get_age(P, {Year, 12, 30})),
+    ?assertEqual(100, personnummer:get_age(P, {Year, 12, 31})),
+    ?assertEqual(personnummer:get_age(P, Today), personnummer:get_age(P)).
 
 %%%=============================================================================
 %%% Compliance: drive structured.json from personnummer/meta
@@ -343,6 +383,16 @@ interim_json_test_() ->
         end,
         Entries
     ).
+
+%% Find a valid check digit so date-boundary tests follow the current year.
+personnummer_for_date({Y, M, D}) ->
+    Prefix = iolist_to_binary(io_lib:format("~4..0B~2..0B~2..0B466", [Y, M, D])),
+    [Pnr] = [
+        P
+     || Check <- lists:seq($0, $9),
+        {ok, P} <- [personnummer:parse(<<Prefix/binary, Check>>)]
+    ],
+    Pnr.
 
 read_testdata(Name) ->
     Path = filename:join([filename:dirname(?FILE), "testdata", Name]),

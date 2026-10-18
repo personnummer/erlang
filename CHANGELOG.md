@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Use the `+` separator from the calendar year a person turns 100, preserving
+  the birth century when short-format personnummer are parsed again.
+- Reject inputs with trailing newlines instead of accepting them as valid
+  personnummer.
+
 ## [3.1.1] - 2026-10-15
 
 ### Changed
