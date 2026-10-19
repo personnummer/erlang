@@ -28,15 +28,15 @@ jobs:
             elp_otp: "29.1"
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           otp-version: ${{ matrix.otp }}
           rebar3-version: ${{ env.REBAR3_VERSION }}
 
       - name: Cache _build
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: _build
           key: ${{ runner.os }}-otp${{ matrix.otp }}-build-${{ hashFiles('rebar.lock', 'rebar.config') }}
@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-otp${{ matrix.otp }}-build-
 
       - name: Cache dialyzer PLT
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.cache/rebar3
           key: ${{ runner.os }}-otp${{ matrix.otp }}-plt-${{ hashFiles('rebar.config') }}
