@@ -1,5 +1,5 @@
 [tools]
-erlang = "29.1.2"
+erlang = "29.1.3"
 rebar = "3.28.0"
 "github:WhatsApp/erlang-language-platform" = { version = "2026-10-14", matching = "otp-29.1.tar.gz" }
 
